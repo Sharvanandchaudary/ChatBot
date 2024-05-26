@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="description" content="" />
+<meta name="keywords" content="" />
+<title>Financial Chatbot</title>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"/>
+
+<script>
+function runBot() {
+    var request = new XMLHttpRequest();
+	var input = document.getElementById("t2").value;
+	var my_data = ""
+	my_data = my_data + document.getElementById("t1").value+"\n"
+
+	my_data = my_data + "You: "+input+"\n"
+	request.open("GET", "http://127.0.0.1:5000/ChatData?mytext="+input);
+	request.onreadystatechange = function() {
+    if(this.readyState === 4 && this.status === 200) {
+	   var output = this.responseText;
+	   document.getElementById("t2").value = "";
+	   my_data = my_data + output+"\n";
+	   document.getElementById("t1").innerHTML = my_data;
+	   document.getElementById("t2").innerHTML = "";
+	  }
+    };
+	request.send();
+}
+</script>
+</head>
+<body>
+		<div id="slogan">
+			
+		</div>
+	</div>
+	<div id="menu">
+
+	<ul style="list-style-type: none; padding: 0; margin: 0; text-align: center;">
+    
+</ul>
+
+		<br class="clearfix" />
+	</div>
+	
+	
+	 <font size="" color="red"><center>{{ data|safe }}</center></font>
+
+	  
+	
+	
+         
+	<div id="result">
+        &nbsp;&nbsp;&nbsp;
+    </div>
+	
+
+
+
+<div class="container-fluid h-100" style="position: fixed; bottom: 0;">
+			<div class="row justify-content-center h-100">		
+				<div class="col-md-8 col-xl-6 chat">
+					<div class="card">
+						<div class="card-header msg_head">
+							<div class="d-flex bd-highlight">
+								<div class="img_cont">
+									<img src="https://i.ibb.co/fSNP7Rz/icons8-chatgpt-512.png" class="rounded-circle user_img">
+									<span class="online_icon"></span>
+								</div>
+								<div class="user_info">
+									<span>FinChatBot</span>
+									<p>Ask me anything!</p>
+								</div>
+							</div>
+						</div>
+											<div class="card-footer" >
+							<div style="background-color: grey; padding: 8px;" bottom: 0;">
+    <textarea name="t1" id="t1" rows="8" cols="40" readonly style="font-family: Times New Roman; font-size: 20px; color: white; background-color: transparent; border: none; resize: none; white-space: pre-wrap;"></textarea>
+</div>
+<div style="display: inline-block;">
+    <input type="text" name="t2" id="t2" placeholder="Type your message..." autocomplete="off" class="form-control type_msg" required style="width: 520px; font-size: 16px;" />
+</div>
+
+
+
+							<button type="button" onclick="runBot()" class="action-button"><i class="fas fa-location-arrow"></i></button>
+
+								</div>
+							</form>
+<div style="text-align:center">
+<li style="display: inline-block; margin-right: 20px;"><a href="TrainML" style="text-decoration: none;"><font size="6" color="grey">Check FinBot's Accuracy score</font></a></li></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+
+
+	<br/><br/><br/><br/><br/>
+</body>
+</html>
